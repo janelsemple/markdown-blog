@@ -57,11 +57,9 @@ const Post = async ({ params }: PostProps) => {
 /**
  * Generates the static paths for each blog post.
  */
-export async function generateStaticParams(): Promise<
-  { params: { id: string } }[]
-> {
+export async function generateStaticParams(): Promise<{  id: string  }[]> {
   const paths = getAllPostIds();
-  return paths.map((path) => ({ params: { id: path.params.id } }));
+  return paths.map((path) => (path.params));
 }
 
 export default Post;

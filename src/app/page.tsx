@@ -1,18 +1,9 @@
-import { getSortedPostsData, PostData } from "../lib/posts";
-import PostCard from "./components/PostCard";
 
-/**
- * Fetches the sorted blog post data.
- */
-const fetchPosts = async (): Promise<PostData[]> => {
-  return getSortedPostsData();
-};
+import PostCard from './components/PostCard';
+import { fetchAllPostInfo } from '../lib/graphql-service';
 
-/**
- * The homepage component that displays a list of blog posts.
- */
 const Home = async () => {
-  const posts = await fetchPosts();
+  const posts = await fetchAllPostInfo();
 
   return (
     <div className="max-w-4xl mx-auto py-8">

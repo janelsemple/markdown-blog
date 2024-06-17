@@ -1,5 +1,6 @@
+
+import {fetchAllPostIds, fetchPost} from "../../../lib/graphql-service";
 import ReactMarkdown from "react-markdown";
-import { getAllPostIds, getPostData, PostData } from "../../../lib/posts";
 import Link from "next/link";
 
 interface PostProps {
@@ -12,8 +13,8 @@ interface PostProps {
  * A component that displays a single blog post.
  */
 const Post = async ({ params }: PostProps) => {
-  try {
-    const post = await getPostData(params.id);
+    console.log("fetching post: " + params.id);
+    const post = await fetchPost(params.id);
     return (
       <article className="max-w-4xl mx-auto py-8">
         <header className="mb-8">
@@ -48,18 +49,15 @@ const Post = async ({ params }: PostProps) => {
         </div>
       </article>
     );
-  } catch (error) {
-    console.error("Error fetching post data:", error);
-    return <div>Error loading post.</div>;
-  }
+
 };
 
 /**
  * Generates the static paths for each blog post.
  */
 export async function generateStaticParams(): Promise<{  id: string  }[]> {
-  const paths = getAllPostIds();
-  return paths.map((path) => (path.params));
+  const paths = await fetchAllPostIds();
+  return paths.map(({id}) => ({id: id}));
 }
 
 export default Post;

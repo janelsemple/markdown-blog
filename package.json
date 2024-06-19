@@ -7,8 +7,9 @@
   "target": "es2020",
   "scripts": {
     "dev": "concurrently \"cd graphql && npm run start\" \"wait-on tcp:localhost:4000 && NODE_OPTIONS='--trace-warnings' next dev\"",
+    "install-all": "cd graphql && npm install && cd .. && npm install",
     "build": "next build",
-    "start": "next start",
+    "start": "concurrently \"cd graphql && npm run start\" \"wait-on tcp:localhost:4000 && next start\"",
     "lint": "next lint",
     "export": "next export"
   },

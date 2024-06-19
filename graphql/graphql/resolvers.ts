@@ -7,14 +7,25 @@ export const resolvers = {
     posts: async (_: any, { search }: { search?: string }): Promise<PostData[]> => {
       console.log('search', search);
       if (search) {
+        // Search for posts that contain the search string in the title or content
         const result: SearchResponse<PostData> = await client.search({
           index: 'posts', 
           body: {
             query: {
-              multi_match: {
-                query: search,
-                fields: ['title', 'content'],
-              },
+              bool: {
+                should: [
+                  {
+                    match_phrase: {
+                      title: search
+                    }
+                  },
+                  {
+                    match_phrase: {
+                      content: search
+                    }
+                  }
+                ]
+              }
             },
           },
         });

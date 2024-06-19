@@ -1,6 +1,6 @@
 import { PostData, getSortedPostsData } from '../util/posts.js';
-import client from '../util/elastisearch.js'; // Adjust the import path as necessary
-import { SearchResponse } from '@elastic/elasticsearch/lib/api/types';
+import client from '../util/elastisearch.js'; 
+import { SearchResponse } from '@elastic/elasticsearch/lib/api/types.js';
 
 export const resolvers = {
   Query: {
@@ -8,7 +8,7 @@ export const resolvers = {
       console.log('search', search);
       if (search) {
         const result: SearchResponse<PostData> = await client.search({
-          index: 'posts', // Replace with your index name
+          index: 'posts', 
           body: {
             query: {
               multi_match: {
@@ -20,7 +20,7 @@ export const resolvers = {
         });
 
         return result.hits.hits.map(hit => ({
-          id: hit._id || '', // Ensure id is never undefined
+          id: hit._id || '', 
           title: hit._source?.title || '',
           date: hit._source?.date || '',
           content: hit._source?.content || '',

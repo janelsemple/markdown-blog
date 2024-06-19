@@ -2,8 +2,8 @@
 
 # dependencies
 /node_modules
-/servers/node_modules
-/servers/dist
+/graphql/node_modules
+/graphql/dist
 /.pnp
 .pnp.js
 .yarn/install-state.gz

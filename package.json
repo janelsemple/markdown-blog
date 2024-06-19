@@ -6,7 +6,7 @@
   "module": "esnext",
   "target": "es2020",
   "scripts": {
-    "dev": "concurrently \"cd servers && npm run start\" \"wait-on tcp:localhost:4000 && NODE_OPTIONS='--trace-warnings' next dev\"",
+    "dev": "concurrently \"cd graphql && npm run start\" \"wait-on tcp:localhost:4000 && NODE_OPTIONS='--trace-warnings' next dev\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import client from './elastisearch'; // Adjust the import path as necessary
+import client from './elastisearch.js'; 
 
 const postsDirectory = path.join(process.cwd(), "../posts");
 
@@ -95,7 +95,7 @@ export async function indexPosts() {
         title: post.title,
         date: post.date,
         content: post.content,
-      },
+      }, 
     });
 
     console.log(`Indexed post: ${post.id}`);

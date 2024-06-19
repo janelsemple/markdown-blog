@@ -1,4 +1,3 @@
-// lib/elasticsearch.js
 import { Client } from '@elastic/elasticsearch';
 
 const client = new Client({

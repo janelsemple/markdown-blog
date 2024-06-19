@@ -15,7 +15,6 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
   if (query) {
     try {
       posts = await searchPosts(query);
-      console.log('Search results:', posts);
       if (posts === undefined || posts.length === 0) {
         console.log('No results found for query:', query);
       }

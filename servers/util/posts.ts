@@ -1,8 +1,9 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import client from './elastisearch'; // Adjust the import path as necessary
 
-const postsDirectory = path.join(process.cwd(), "posts");
+const postsDirectory = path.join(process.cwd(), "../posts");
 
 export interface PostData {
   id: string;
@@ -79,3 +80,26 @@ function sortPostsByDate(postsData: PostData[]): PostData[] {
     }
   });
 }
+
+/**
+ * Indexes all markdown posts into Elasticsearch.
+ */
+export async function indexPosts() {
+  const postsData = getSortedPostsData();
+
+  for (const post of postsData) {
+    await client.index({
+      index: 'posts',
+      id: post.id,
+      body: {
+        title: post.title,
+        date: post.date,
+        content: post.content,
+      },
+    });
+
+    console.log(`Indexed post: ${post.id}`);
+  }
+}
+
+indexPosts().catch(console.error);

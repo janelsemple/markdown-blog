@@ -2,8 +2,9 @@
 
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone'
-import { resolvers } from './resolvers.js';
-import { typeDefs } from './schema.js';
+import { resolvers } from './graphql/resolvers.js';
+import { typeDefs } from './graphql/schema.js';
+import { indexPosts } from './util/posts.js';
 
 // server setup
 const server = new ApolloServer({
@@ -14,6 +15,9 @@ const server = new ApolloServer({
 const { url } = await startStandaloneServer(server, {
   listen: { port: 4000 }
 })
+
+// index posts for elastisearch
+indexPosts();
 
 // Start the server
 console.log(`🚀 Server ready at ${url}`)

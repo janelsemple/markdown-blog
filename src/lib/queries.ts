@@ -10,21 +10,32 @@ export const GET_POST_TITLES_AND_DATES = gql`
     }
   }
 `;
+
 export const GET_POST_IDS = gql`
-    query GetPosts {
-        posts {
-        id
-        }
+  query GetPosts {
+    posts {
+      id
     }
-    `;
+  }
+`;
 
 export const GET_POST_BY_ID = gql`
-    query GetPost($id: String!) {
-        post(id: $id) {
-        id
-        title
-        date
-        content
-        }
+  query GetPost($id: String!) {
+    post(id: $id) {
+      id
+      title
+      date
+      content
     }
-    `;
+  }
+`;
+
+export const SEARCH_POSTS = gql`
+  query SearchPosts($query: String!) {
+    posts(search: $query) {
+      id
+      title
+      date
+    }
+  }
+`;

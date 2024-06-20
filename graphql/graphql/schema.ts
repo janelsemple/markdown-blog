@@ -8,8 +8,14 @@ export const typeDefs = gql`
         content: String!
     }
 
+    type PostSearchResult {
+        titleMatches: [Post]
+        contentMatches: [Post]
+    }
+
     type Query {
-        posts(search: String): [Post]
+        posts: [Post]
+        searchPosts(search: String!): PostSearchResult
         post(id: String!): Post
     }
 `;

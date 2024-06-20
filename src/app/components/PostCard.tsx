@@ -13,7 +13,6 @@ interface PostCardProps {
  */
 const PostCard = ({ id, title, date, highlighted = '' }: PostCardProps) => {
   const highlightedText = highlightText(title, highlighted);
-  console.log("Highlighted: " + highlightedText?.toString());
   return (
     <li className="border border-gray-300 rounded-md p-4 hover:bg-gray-100">
       <Link href={`/posts/${id}`}>

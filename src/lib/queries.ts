@@ -32,10 +32,17 @@ export const GET_POST_BY_ID = gql`
 
 export const SEARCH_POSTS = gql`
   query SearchPosts($query: String!) {
-    posts(search: $query) {
-      id
-      title
-      date
+    searchPosts(search: $query) {
+      titleMatches {
+        id
+        title
+        date
+      }
+      contentMatches {
+        id
+        title
+        date
+      }
     }
   }
 `;

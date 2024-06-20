@@ -94,11 +94,9 @@ export async function indexPosts() {
       body: {
         title: post.title,
         date: post.date,
-        content: post.content,
+        content: post.content.toLocaleLowerCase(),
       }, 
     });
-
-    console.log(`Indexed post: ${post.id}`);
   }
 }
 

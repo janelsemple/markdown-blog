@@ -5,7 +5,6 @@ export const highlightText = (text: string, highlight: string): React.ReactNode 
     }
     const regex = new RegExp(`(${highlight})`, 'gi');
     const parts = text.split(regex);
-    console.log(parts);
     return parts.map((part, index) =>
       regex.test(part) ? (
         <span key={index} style={{backgroundColor: 'yellow'}}>

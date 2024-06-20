@@ -64,7 +64,6 @@ export function getSortedPostsData(): PostData[] {
       content: matterResult.content,
     };
   });
-
   return sortPostsByDate(allPostsData);
 }
 

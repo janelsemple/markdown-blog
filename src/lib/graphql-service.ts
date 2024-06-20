@@ -1,6 +1,6 @@
 // lib/graphql-service.ts
 import { getClient } from '../lib/apollo-client';
-import { GET_POST_TITLES_AND_DATES, GET_POST_BY_ID, GET_POST_IDS, SEARCH_POSTS } from './queries';
+import { GET_POST_TITLES_AND_DATES, GET_POST_BY_ID, GET_POST_IDS} from './queries';
 
 export interface PostData {
   id: string;
@@ -15,6 +15,7 @@ export interface PostData {
 export const fetchAllPostInfo = async (): Promise<PostData[]> => {
   const { data } = await getClient().query({
     query: GET_POST_TITLES_AND_DATES,
+    fetchPolicy: "network-only", // Ensures the query fetches from the network
   });
   return data.posts;
 };
@@ -26,6 +27,7 @@ export const fetchPost = async (id: string): Promise<PostData> => {
   const { data } = await getClient().query({
     query: GET_POST_BY_ID,
     variables: { id },
+    fetchPolicy: "network-only", // Ensures the query fetches from the network
   });
 
   return data.post;
@@ -37,9 +39,8 @@ export const fetchPost = async (id: string): Promise<PostData> => {
 export const fetchAllPostIds = async (): Promise<{ id: string }[]> => {
   const { data } = await getClient().query({
     query: GET_POST_IDS,
+    fetchPolicy: "network-only", // Ensures the query fetches from the network
   });
-
   return data.posts.map((post: PostData) => ({ id: post.id }));
 };
-
 

@@ -30,19 +30,22 @@ export const GET_POST_BY_ID = gql`
   }
 `;
 
-export const SEARCH_POSTS = gql`
-  query SearchPosts($query: String!) {
-    searchPosts(search: $query) {
-      titleMatches {
-        id
-        title
-        date
-      }
-      contentMatches {
-        id
-        title
-        date
-      }
+export const SEARCH_POSTS_BY_TITLE = gql`
+  query SearchPostsByTitle($query: String!) {
+    searchPostsByTitle(search: $query) {
+      id
+      title
+      date
+    }
+  }
+`;
+
+export const SEARCH_POSTS_BY_CONTENT = gql`
+  query SearchPostsByContent($query: String!) {
+    searchPostsByContent(search: $query) {
+      id
+      title
+      date
     }
   }
 `;

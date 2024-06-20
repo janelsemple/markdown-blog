@@ -42,13 +42,4 @@ export const fetchAllPostIds = async (): Promise<{ id: string }[]> => {
   return data.posts.map((post: PostData) => ({ id: post.id }));
 };
 
-/**
- * Fetches the data for posts based on a search term.
- */
-export const searchPosts = async (search: string): Promise<PostData[]> => {
-  const { data } = await getClient().query({
-    query: SEARCH_POSTS,
-    variables: { query: search },
-  });
-  return data.posts;
-};
+

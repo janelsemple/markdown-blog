@@ -1,24 +1,38 @@
 // src/app/components/SearchBar.tsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface SearchBarProps {
   defaultQuery?: string;
+  onSearch: (query: string) => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ defaultQuery = '' }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ defaultQuery = '', onSearch }) => {
+  const [query, setQuery] = useState(defaultQuery);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      onSearch(query);
+    }, 300);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [query, onSearch]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+  };
+
   return (
-    <form action="/search" method="get" className="flex justify-center mb-8">
+    <div className="flex justify-center mb-8">
       <input
         type="text"
-        name="query"
-        defaultValue={defaultQuery}
+        value={query}
+        onChange={handleChange}
         placeholder="Search blog posts..."
         className="px-4 py-2 w-64 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
-      <button type="submit" className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md">
-        Search
-      </button>
-    </form>
+    </div>
   );
 };
 

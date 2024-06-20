@@ -9,8 +9,9 @@
     "predev": "rimraf .next/cache",
     "dev": "concurrently \"cd graphql && npm run start\" \"wait-on tcp:localhost:4000 && NODE_OPTIONS='--trace-warnings' next dev\"",
     "install-all": "cd graphql && npm install && cd .. && npm install",
-    "build": "next build",
+    "build": "concurrently \"cd graphql && npm run start\" \"wait-on tcp:localhost:4000 && NODE_OPTIONS='--trace-warnings' next build && next export\"",
     "start": "concurrently \"cd graphql && npm run start\" \"wait-on tcp:localhost:4000 && next start\"",
+    "serve": "concurrently \"cd graphql && npm run start\" \"wait-on tcp:localhost:4000 && npx serve@latest out\"",
     "lint": "next lint",
     "export": "next export"
   },

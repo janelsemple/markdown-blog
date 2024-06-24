@@ -105,6 +105,53 @@ export const resolvers = {
     post: async (_: any, { id }: { id: string }): Promise<PostData | undefined> => {
       const post = getSortedPostsData().find((post) => post.id === id);
       return post;
+    },
+
+    /**
+     * Searches for images by alt text.
+     *
+     * @param {any} _ - The parent resolver, not used here.
+     * @param {Object} args - The arguments passed to the resolver.
+     * @param {string} args.altText - The alt text to search for.
+     * @returns {Promise<Array<{ url: string, postId: string, alt: string }>>} A promise that resolves to an array of image URLs, their associated post IDs, and alt text.
+     */
+    searchImagesByAltText: async (_: any, { altText }: { altText: string }): Promise<{ url: string; postId: string; alt: string }[]> => {
+      if (!altText) {
+        return [];
+      }
+
+      const response = await client.search({
+        index: 'posts',
+        body: {
+          query: {
+            nested: {
+              path: 'images',
+              query: {
+                match: {
+                  'images.alt': altText
+                }
+              },
+              inner_hits: {}
+            }
+          },
+          _source: ['images.url', 'images.postId', 'images.alt']
+        }
+      });
+
+      const hits = response.hits.hits;
+      const images: { url: string; postId: string; alt: string }[] = [];
+
+      hits.forEach((hit: any) => {
+        hit.inner_hits.images.hits.hits.forEach((imageHit: any) => {
+          images.push({
+            url: imageHit._source.url,
+            postId: imageHit._source.postId,
+            alt: imageHit._source.alt
+          });
+        });
+      });
+
+      return images;
     }
   }
 };

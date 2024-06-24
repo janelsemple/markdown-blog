@@ -8,10 +8,17 @@ export const typeDefs = gql`
         content: String!
     }
 
+    type ImageSearchResult {
+        url: String!
+        postId: String!
+        alt: String!
+    }
+
     type Query {
         posts: [Post]
         searchPostsByTitle(search: String!): [Post]
         searchPostsByContent(search: String!): [Post]
         post(id: String!): Post
+        searchImagesByAltText(altText: String!): [ImageSearchResult]
     }
 `;

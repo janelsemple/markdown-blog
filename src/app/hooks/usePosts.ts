@@ -18,11 +18,17 @@ interface PostData {
  * @returns A promise that resolves to an array of PostData objects.
  */
 const searchPostsByTitle = async (search: string): Promise<PostData[]> => {
-  const { data } = await apolloClient.query({
-    query: SEARCH_POSTS_BY_TITLE,
-    variables: { query: search },
-  });
-  return data.searchPostsByTitle;
+  try {
+    const sanitizedSearch = sanitizeInput(search);
+    const { data } = await apolloClient.query({
+      query: SEARCH_POSTS_BY_TITLE,
+      variables: { query: sanitizedSearch },
+    });
+    return data.searchPostsByTitle;
+  } catch (error) {
+    console.error('Error fetching search results by title:', error);
+    throw new Error('Error fetching search results by title');
+  }
 };
 
 /**
@@ -32,11 +38,17 @@ const searchPostsByTitle = async (search: string): Promise<PostData[]> => {
  * @returns A promise that resolves to an array of PostData objects.
  */
 const searchPostsByContent = async (search: string): Promise<PostData[]> => {
-  const { data } = await apolloClient.query({
-    query: SEARCH_POSTS_BY_CONTENT,
-    variables: { query: search },
-  });
-  return data.searchPostsByContent;
+  try {
+    const sanitizedSearch = sanitizeInput(search);
+    const { data } = await apolloClient.query({
+      query: SEARCH_POSTS_BY_CONTENT,
+      variables: { query: sanitizedSearch },
+    });
+    return data.searchPostsByContent;
+  } catch (error) {
+    console.error('Error fetching search results by content:', error);
+    throw new Error('Error fetching search results by content');
+  }
 };
 
 /**
@@ -45,10 +57,25 @@ const searchPostsByContent = async (search: string): Promise<PostData[]> => {
  * @returns A promise that resolves to an array of PostData objects.
  */
 const fetchInitialPosts = async (): Promise<PostData[]> => {
-  const { data } = await apolloClient.query({
-    query: GET_POST_TITLES_AND_DATES,
-  });
-  return data.posts;
+  try {
+    const { data } = await apolloClient.query({
+      query: GET_POST_TITLES_AND_DATES,
+    });
+    return data.posts;
+  } catch (error) {
+    console.error('Error fetching initial posts:', error);
+    throw new Error('Error fetching initial posts');
+  }
+};
+
+/**
+ * Sanitize input to prevent injection attacks.
+ * 
+ * @param input - The input string to sanitize.
+ * @returns The sanitized input string.
+ */
+const sanitizeInput = (input: string): string => {
+  return input.replace(/[^a-zA-Z0-9 ]/g, '');
 };
 
 /**

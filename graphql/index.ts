@@ -17,7 +17,7 @@ const { url } = await startStandaloneServer(server, {
 })
 
 // index posts for elastisearch
-indexPosts();
+indexPosts().catch(console.error);
 
 // Start the server
 console.log(`🚀 Server ready at ${url}`)

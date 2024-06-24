@@ -18,7 +18,6 @@ async function createIndex() {
   
   if (indexExists) {
     console.log(`Index "${indexName}" already exists`);
-    await client.indices.delete({ index: indexName });
   } else {
     // Create the index with the mapping
     await client.indices.create({
@@ -49,3 +48,4 @@ async function createIndex() {
 createIndex().catch(console.error);
 
 export default client;
+

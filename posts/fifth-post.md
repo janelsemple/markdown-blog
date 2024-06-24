@@ -1,4 +1,3 @@
-
 ---
 title: "SpaceX Mars Mission: Preparing for the Next Giant Leap"
 date: "2024-06-20"

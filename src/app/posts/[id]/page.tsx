@@ -2,6 +2,7 @@
 import {fetchAllPostIds, fetchPost} from "../../../lib/graphql-service";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
+import CustomImage from "../../components/CustomImage";
 
 interface PostProps {
   params: {
@@ -24,6 +25,12 @@ const Post = async ({ params }: PostProps) => {
         <div className="prose max-w-none">
           <ReactMarkdown
             components={{
+              img: ({ node, ...props }) => {
+                // render custom image component 
+                if (props.src) {
+                  return <CustomImage src={props.src} alt={props.alt || 'Random Image'} />;
+                }
+              },
               code: ({ className, children, ...props }) => {
                 const isInline = className === "language-text";
                 return (

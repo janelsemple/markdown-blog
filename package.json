@@ -6,10 +6,12 @@
   "module": "esnext",
   "target": "es2020",
   "scripts": {
+    "predev": "rimraf .next/cache",
     "dev": "concurrently \"cd graphql && npm run start\" \"wait-on tcp:localhost:4000 && NODE_OPTIONS='--trace-warnings' next dev\"",
     "install-all": "cd graphql && npm install && cd .. && npm install",
-    "build": "next build",
+    "build": "concurrently \"cd graphql && npm run start\" \"wait-on tcp:localhost:4000 && NODE_OPTIONS='--trace-warnings' next build && next export\"",
     "start": "concurrently \"cd graphql && npm run start\" \"wait-on tcp:localhost:4000 && next start\"",
+    "serve": "concurrently \"cd graphql && npm run start\" \"wait-on tcp:localhost:4000 && npx serve@latest out\"",
     "lint": "next lint",
     "export": "next export"
   },
@@ -35,6 +37,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "postcss": "^8.4.38",
+    "rimraf": "^5.0.7",
     "tailwindcss": "^3.4.4",
     "typescript": "^5"
   }

@@ -9,7 +9,9 @@ export const typeDefs = gql`
     }
 
     type Query {
-        posts(search: String): [Post]
+        posts: [Post]
+        searchPostsByTitle(search: String!): [Post]
+        searchPostsByContent(search: String!): [Post]
         post(id: String!): Post
     }
 `;

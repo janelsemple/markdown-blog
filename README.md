@@ -6,7 +6,7 @@ Markdown blog is a simple static site generated using next and markdown files.
 
 Markdown blog reads in the contents of the posts folder, then uses the yaml to generate cards that navigate to a page for each blog post. The markdown of each blog post is safely rendered using react-markdown. 
 
-There is also a dynamically rendered search page that uses a grapqhql endpoint to search the posts with elastisearch and then displays the list of matches. 
+There is also a dynamically rendered search page that uses a grapqhql endpoint to search the posts with elastisearch and then displays the list of matches. You can select if you would like to filter the search results by title or content.
 
 ## Setting up
 
@@ -23,7 +23,14 @@ second terminal:
 
 `npm run dev` to start the graphql and Next server. 
 
-## To build and run
+## To build static pages and serve
 
-`npm run build` to build the next app
-`npm run start` to run the built app and the graphql server (make sure you run the elastisearch container before starting).
+`npm run build` to build the next app (also starts the graphql server which is used for building).
+`npm run serve` to serve the built static pages and start the graphql server (make sure you run the elastisearch container before starting).
+
+
+## Entry Points
+
+The two main entry points for the code are `src/app/page.tsx` and `graphql/index.ts`.
+
+

@@ -135,14 +135,19 @@ export const resolvers = {
                   ]
                 }
               },
-              inner_hits: {}
+              inner_hits: {
+                size: 100 // Adjust based on the expected number of inner hits
+              }
             }
           },
-          _source: ['images.url', 'images.postId', 'images.alt']
+          _source: ['images.url', 'images.postId', 'images.alt'],
+          size: 100 // Adjust based on the expected number of top-level documents
         }
       });
 
       const hits = response.hits.hits;
+
+      console.log(hits);
       const images: { url: string; postId: string; alt: string }[] = [];
 
       hits.forEach((hit: any) => {

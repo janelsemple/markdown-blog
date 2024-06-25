@@ -7,45 +7,45 @@ SpaceX is gearing up for its most ambitious mission yet – a manned mission to 
 
 ## Rocket Technology and Innovations
 
-![Rocket Technology](https://source.unsplash.com/800x600/?rocket,technology)
+![Rocket Technology](photo_18)
 
 SpaceX has developed cutting-edge rocket technology for the Mars mission. The Starship rocket, designed for deep space travel, features advanced propulsion systems and enhanced payload capacity.
 
-![Starship Rocket](https://source.unsplash.com/800x600/?starship,rocket)
+![Starship Rocket](photo_17)
 
 ## Astronaut Training and Selection
 
-![Astronaut Training](https://source.unsplash.com/800x600/?astronaut,training)
+![Astronaut Training](photo_16)
 
 The astronaut selection process is rigorous, with candidates undergoing extensive training to prepare for the challenges of a Mars mission. Training includes simulations, physical conditioning, and technical education.
 
 ## Mission Timeline and Objectives
 
-![Mission Timeline](https://source.unsplash.com/800x600/?mission,timeline)
+![Mission Timeline](photo_15)
 
 The Mars mission is scheduled to launch in 2026, with a journey time of approximately six months. Objectives include establishing a sustainable human presence on Mars and conducting scientific research to understand the planet's environment.
 
-![Mars Mission](https://source.unsplash.com/800x600/?mars,mission)
+![Mars Mission](photo_14)
 
 ## Challenges and Solutions
 
-![Challenges](https://source.unsplash.com/800x600/?challenges,solutions)
+![Challenges](photo_13)
 
 The mission faces numerous challenges, including radiation exposure, life support systems, and psychological effects of long-duration space travel. SpaceX is working on innovative solutions to address these challenges and ensure the safety and well-being of the crew.
 
-![Solutions](https://source.unsplash.com/800x600/?solutions,space)
+![Solutions](photo_12)
 
 ## Conclusion
 
-![Conclusion](https://source.unsplash.com/800x600/?conclusion,spacex)
+![Conclusion](photo_10)
 
 SpaceX’s Mars mission represents a monumental step forward in space exploration. With advanced rocket technology, rigorous astronaut training, and a clear mission timeline, SpaceX is well on its way to making human exploration of Mars a reality.
 
-![Space Exploration](https://source.unsplash.com/800x600/?space,exploration)
+![Space Exploration](photo_11)
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Nullam auctor, nisl eget aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl.
 
-![Lorem Ipsum](https://source.unsplash.com/800x600/?lorem,ipsum)
+![Lorem Ipsum](photo_10)
 
 ```javascript
 // Example of some code
@@ -55,12 +55,12 @@ function highlightFeature(feature) {
 highlightFeature('Rocket Technology and Innovations');
 ```
 
-![Code Example](https://source.unsplash.com/800x600/?code,javascript)
+![Code Example](photo_9)
 
 Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
 
-![Mars 1](https://source.unsplash.com/800x600/?mars,planet)
-![Mars 2](https://source.unsplash.com/800x600/?mars,spacex)
-![Mars 3](https://source.unsplash.com/800x600/?mars,space)
-![Mars 4](https://source.unsplash.com/800x600/?mars,rover)
-![Mars 5](https://source.unsplash.com/800x600/?mars,mission)
+![Mars 1](photo_8)
+![Mars 2](photo_7)
+![Mars 3](photo_6)
+![Mars 4](photo_5)
+![Mars 5](photo_4)

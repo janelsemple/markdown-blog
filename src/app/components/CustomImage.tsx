@@ -16,12 +16,12 @@ const CustomImage: FC<CustomImageProps> = ({ src, alt }) => {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <img
-        src={`/api/photos?size=medium&src=${encodeURIComponent(src)}`}
-        alt={alt}
-        onClick={toggleOverlay}
-        style={{ cursor: 'pointer', maxHeight: '400px', objectFit: 'contain' }}
-      />
+        <img
+          src={`/api/photos?size=medium&src=${encodeURIComponent(src)}`}
+          alt={alt}
+          onClick={toggleOverlay}
+          style={{ cursor: 'pointer', maxHeight: '400px', objectFit: 'contain', width: '100%' }}
+        />
       {isOverlayVisible && (
         <dialog
           open
@@ -41,6 +41,7 @@ const CustomImage: FC<CustomImageProps> = ({ src, alt }) => {
             margin: 0,
             cursor: 'pointer',
             zIndex: 1000,
+            flexDirection: 'column'
           }}
         >
           <img
@@ -48,6 +49,7 @@ const CustomImage: FC<CustomImageProps> = ({ src, alt }) => {
             alt={alt}
             style={{ maxHeight: '90%', maxWidth: '90%', objectFit: 'contain' }}
           />
+         <p style={{ color: 'white' }}>{alt}</p>
         </dialog>
       )}
     </div>

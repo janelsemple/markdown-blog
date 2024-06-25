@@ -51,11 +51,11 @@ export const SEARCH_POSTS_BY_CONTENT = gql`
 `;
 
 export const SEARCH_IMAGES_BY_ALT = gql`
-  query SearchImagesByAlt($query: String!) {
-    searchImagesByAlt(search: $query) {
-      id
+query SearchImagesByAlt($query: String!) {
+    searchImagesByAltText(altText: $query) {
       alt
       url
+      postId
     }
   }
 `;

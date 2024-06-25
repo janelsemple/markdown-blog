@@ -127,8 +127,12 @@ export const resolvers = {
             nested: {
               path: 'images',
               query: {
-                match: {
-                  'images.alt': altText
+                bool: {
+                  should: [
+                    { match: { 'images.alt': altText } },
+                    { match_phrase: { 'images.alt': altText } },
+                    { wildcard: { 'images.alt': `*${altText}*` } }
+                  ]
                 }
               },
               inner_hits: {}

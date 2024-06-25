@@ -19,6 +19,12 @@ export async function GET(req: NextRequest) {
     large: 1000,
   };
 
+  const qualities = {
+    small: 60,
+    medium: 75,
+    large: 90,
+  };
+
   const files = fs.readdirSync(photosDirectory).filter(file => /\.(jpg|jpeg|png|gif)$/.test(file));
   if (files.length === 0) {
     return NextResponse.json({ error: 'No photos found' }, { status: 404 });
@@ -30,6 +36,7 @@ export async function GET(req: NextRequest) {
 
   const image = await sharp(filePath)
     .resize({ width: sizes[size as keyof typeof sizes] })
+    .jpeg({ quality: qualities[size as keyof typeof qualities] })
     .toBuffer();
 
   return new NextResponse(image, {

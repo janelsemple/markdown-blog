@@ -3,8 +3,6 @@ title: "The Power of Graphql and Elastic"
 date: "2024-06-12"
 ---
 
-# Second Post
-
 This is the content of the second post.
 
 ![GraphQL](https://source.unsplash.com/800x600/?graphql)

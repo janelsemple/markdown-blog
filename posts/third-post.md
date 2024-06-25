@@ -3,8 +3,6 @@ title: "Google Pixel 8: What's New for Android Users"
 date: "2024-06-11"
 ---
 
-# Google Pixel 8: What's New for Android Users
-
 The Google Pixel 8 has finally arrived, bringing exciting features for Android enthusiasts. Here are the key highlights.
 
 ## Design and Display
@@ -79,13 +77,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl ege
 
 ![Lorem Ipsum 1](https://source.unsplash.com/800x600/?lorem,ipsum)
 
-\`\`\`javascript
+```javascript
 // Example of some code
 function highlightFeature(feature) {
     console.log(`Highlighting feature: ${feature}`);
 }
 highlightFeature('Camera Innovations');
-\`\`\`
+```
 
 ![Code Example](https://source.unsplash.com/800x600/?code,javascript)
 

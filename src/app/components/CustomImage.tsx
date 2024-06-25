@@ -15,12 +15,12 @@ const CustomImage: FC<CustomImageProps> = ({ src, alt }) => {
   const toggleOverlay = () => setOverlayVisible(!isOverlayVisible);
 
   return (
-    <>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
       <img
         src={`/api/photos?size=medium&src=${encodeURIComponent(src)}`}
         alt={alt}
         onClick={toggleOverlay}
-        style={{ cursor: 'pointer' }}
+        style={{ cursor: 'pointer', maxHeight: '400px', objectFit: 'contain' }}
       />
       {isOverlayVisible && (
         <dialog
@@ -46,11 +46,11 @@ const CustomImage: FC<CustomImageProps> = ({ src, alt }) => {
           <img
             src={`/api/photos?size=large&src=${encodeURIComponent(src)}`}
             alt={alt}
-            style={{ maxHeight: '90%', maxWidth: '90%' }}
+            style={{ maxHeight: '90%', maxWidth: '90%', objectFit: 'contain' }}
           />
         </dialog>
       )}
-    </>
+    </div>
   );
 };
 

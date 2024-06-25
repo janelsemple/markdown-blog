@@ -3,6 +3,7 @@ import {fetchAllPostIds, fetchPost} from "../../../lib/graphql-service";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import CustomImage from "../../components/CustomImage";
+import remarkUnwrapImages from "remark-unwrap-images";
 
 interface PostProps {
   params: {
@@ -18,12 +19,17 @@ const Post = async ({ params }: PostProps) => {
     const post = await fetchPost(params.id);
     return (
       <article className="max-w-4xl mx-auto py-8">
+        <Link href="/" className="text-blue-500 hover:text-blue-700">
+            ← Back to Home
+        </Link>
+        <hr className="my-8" />
         <header className="mb-8">
           <h1 className="text-4xl font-bold mb-2">{post.title}</h1>
           <p className="text-gray-600">{post.date}</p>
         </header>
         <div className="prose max-w-none">
           <ReactMarkdown
+          remarkPlugins={[remarkUnwrapImages]}
             components={{
               img: ({ node, ...props }) => {
                 // render custom image component 

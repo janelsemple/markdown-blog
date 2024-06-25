@@ -3,8 +3,6 @@ title: "Tesla's Latest Autopilot: A Game Changer in Autonomous Driving"
 date: "2024-06-15"
 ---
 
-# Tesla's Latest Autopilot: A Game Changer in Autonomous Driving
-
 Tesla has introduced a major update to its Autopilot system, making significant strides in autonomous driving technology. Here’s what you need to know.
 
 ## Advanced Neural Networks
@@ -41,13 +39,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl ege
 
 ![Lorem Ipsum](https://source.unsplash.com/800x600/?lorem,ipsum)
 
-\`\`\`javascript
-// Example of some code
+```
 function highlightFeature(feature) {
     console.log(`Highlighting feature: ${feature}`);
 }
 highlightFeature('Advanced Neural Networks');
-\`\`\`
+```
 
 ![Code Example](https://source.unsplash.com/800x600/?code,javascript)
 

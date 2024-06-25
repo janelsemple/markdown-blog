@@ -3,8 +3,6 @@ title: "SpaceX Mars Mission: Preparing for the Next Giant Leap"
 date: "2024-06-20"
 ---
 
-# SpaceX Mars Mission: Preparing for the Next Giant Leap
-
 SpaceX is gearing up for its most ambitious mission yet – a manned mission to Mars. Here’s a look at the preparations and what to expect.
 
 ## Rocket Technology and Innovations
@@ -49,13 +47,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl ege
 
 ![Lorem Ipsum](https://source.unsplash.com/800x600/?lorem,ipsum)
 
-\`\`\`javascript
+```javascript
 // Example of some code
 function highlightFeature(feature) {
     console.log(`Highlighting feature: ${feature}`);
 }
 highlightFeature('Rocket Technology and Innovations');
-\`\`\`
+```
 
 ![Code Example](https://source.unsplash.com/800x600/?code,javascript)
 

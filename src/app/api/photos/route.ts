@@ -28,7 +28,6 @@ export async function GET(req: NextRequest) {
     };
 
     const filePath = path.join(photosDirectory, `${src}.jpg`);
-    console.log(`Looking for file at: ${filePath}`);
 
     if (!fs.existsSync(filePath)) {
       console.error('File not found:', filePath);
@@ -37,7 +36,6 @@ export async function GET(req: NextRequest) {
 
     // Read file manually to ensure it's accessible
     const fileContent = fs.readFileSync(filePath);
-    console.log('File content length:', fileContent.length);
 
     const image = await sharp(filePath)
       .resize({ width: sizes[size as keyof typeof sizes] })

@@ -9,6 +9,7 @@ declare global {
         url: string;
         postId: string;
         alt: string;
+        buffer?: string;
       }
 
       interface Post {

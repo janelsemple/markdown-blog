@@ -146,8 +146,6 @@ export const resolvers = {
       });
 
       const hits = response.hits.hits;
-
-      console.log(hits);
       const images: { url: string; postId: string; alt: string }[] = [];
 
       hits.forEach((hit: any) => {

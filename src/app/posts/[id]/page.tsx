@@ -2,8 +2,9 @@
 import {fetchAllPostIds, fetchPost} from "../../../lib/graphql-service";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
-import CustomImage from "../../components/CustomImage";
+import LightBoxImage from "../../components/LightBoxImage";
 import remarkUnwrapImages from "remark-unwrap-images";
+ import{ extractAndResizeImages }from "../../../lib/get-images";
 
 interface PostProps {
   params: {
@@ -15,7 +16,6 @@ interface PostProps {
  * A component that displays a single blog post.
  */
 const Post = async ({ params }: PostProps) => {
-    console.log("fetching post: " + params.id);
     const post = await fetchPost(params.id);
     return (
       <article className="max-w-4xl mx-auto py-8">
@@ -34,7 +34,7 @@ const Post = async ({ params }: PostProps) => {
               img: ({ node, ...props }) => {
                 // render custom image component 
                 if (props.src) {
-                  return <CustomImage src={props.src} alt={props.alt || 'Random Image'} />;
+                  return <LightBoxImage src={props.src} alt={props.alt || 'Random Image'} />;
                 }
               },
               code: ({ className, children, ...props }) => {

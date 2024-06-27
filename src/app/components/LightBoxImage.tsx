@@ -7,9 +7,10 @@ import { useState, FC } from 'react';
 interface LightBoxImageProps {
   src: string;
   alt: string;
+  data: string
 }
 
-const LightBoxImage: FC<LightBoxImageProps> = ({ src, alt }) => {
+const LightBoxImage: FC<LightBoxImageProps> = ({ src, alt, data }) => {
   const [isOverlayVisible, setOverlayVisible] = useState<boolean>(false);
 
   const toggleOverlay = () => setOverlayVisible(!isOverlayVisible);
@@ -17,7 +18,7 @@ const LightBoxImage: FC<LightBoxImageProps> = ({ src, alt }) => {
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <img
-        src={`/api/photos?size=medium&src=${encodeURIComponent(src)}`}
+        src={data}
         alt={alt}
         onClick={toggleOverlay}
         style={{ cursor: 'pointer', maxHeight: '400px', objectFit: 'contain', width: '100%' }}

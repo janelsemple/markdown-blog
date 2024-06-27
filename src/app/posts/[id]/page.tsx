@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import LightBoxImage from "../../components/LightBoxImage";
 import remarkUnwrapImages from "remark-unwrap-images";
- import{ extractAndResizeImages }from "../../../lib/get-images";
+import ImageWithFetch from "../../components/ImageWithFetch";
 
 interface PostProps {
   params: {
@@ -34,7 +34,7 @@ const Post = async ({ params }: PostProps) => {
               img: ({ node, ...props }) => {
                 // render custom image component 
                 if (props.src) {
-                  return <LightBoxImage src={props.src} alt={props.alt || 'Random Image'} />;
+                  return <ImageWithFetch src={props.src} alt={props.alt || 'Random Image'} />;
                 }
               },
               code: ({ className, children, ...props }) => {

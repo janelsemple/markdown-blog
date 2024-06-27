@@ -31,7 +31,7 @@ Apple continues to prioritize user privacy and security. The new AI features are
 
 ## Integration with Apple Ecosystem
 
-![Apple Ecosystem](random)
+![Apple Ecosystem](photo_7)
 
 The AI improvements seamlessly integrate with the entire Apple ecosystem. Whether using an iPhone, iPad, or Mac, users will experience consistent and enhanced performance across all their devices, making multitasking and connectivity smoother than ever.
 

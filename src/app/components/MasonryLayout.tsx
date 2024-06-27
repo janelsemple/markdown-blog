@@ -15,7 +15,7 @@ interface MasonryLayoutProps {
  * @param {ImageSearchResult[]} props.images - Array of image search results to be displayed.
  * @returns {JSX.Element} The rendered MasonryLayout component.
  */
-const MasonryLayout: React.FC<MasonryLayoutProps> = ({ images }) => {
+const MasonryLayout = ({ images }: MasonryLayoutProps) => {
   const firstColumn = images.filter((_, index) => index % 3 === 0);
   const secondColumn = images.filter((_, index) => index % 3 === 1);
   const thirdColumn = images.filter((_, index) => index % 3 === 2);

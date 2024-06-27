@@ -2,7 +2,6 @@
 import {fetchAllPostIds, fetchPost} from "../../../lib/graphql-service";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
-import LightBoxImage from "../../components/LightBoxImage";
 import remarkUnwrapImages from "remark-unwrap-images";
 import ImageWithFetch from "../../components/ImageWithFetch";
 

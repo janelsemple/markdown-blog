@@ -64,11 +64,9 @@ export const resolvers = {
      */
     searchPostsByContent: async (_: any, { search }: { search: string }) => {
       if (!search) {
-        // If the search string is empty, return no posts
         return [];
       }
 
-      // Search for posts that contain the search string in the content
       const contentResult: SearchResponse<PostData> = await client.search({
         index: 'posts',
         body: {
@@ -136,12 +134,12 @@ export const resolvers = {
                 }
               },
               inner_hits: {
-                size: 100 // Adjust based on the expected number of inner hits
+                size: 100 
               }
             }
           },
           _source: ['images.url', 'images.postId', 'images.alt'],
-          size: 100 // Adjust based on the expected number of top-level documents
+          size: 100 
         }
       });
 

@@ -1,8 +1,15 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import FilterDropdown from './FilterDropdown';
 
 let timeoutId: NodeJS.Timeout;
 
+/**
+ * Debounces a function by the specified delay.
+ * @param {Function} func - The function to debounce.
+ * @param {number} delay - The debounce delay in milliseconds.
+ * @returns {Function} - The debounced function.
+ */
 const debounce = (func: (...args: any[]) => void, delay: number) => {
   return (...args: any[]) => {
     clearTimeout(timeoutId);
@@ -17,23 +24,28 @@ interface SearchBarProps {
   filter?: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ query, filter = 'title' }) => {
+/**
+ * SearchBar component for inputting search queries and selecting filters.
+ * @param {SearchBarProps} props - The component props.
+ * @returns {JSX.Element} - The rendered SearchBar component.
+ */
+const SearchBar = ({ query, filter = 'title' }: SearchBarProps) => {
   const [searchQuery, setSearchQuery] = useState(query);
   const [currentFilter, setCurrentFilter] = useState(filter);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setSearchQuery(query);
     setCurrentFilter(filter);
+    if (inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.setSelectionRange(inputRef.current.value.length, inputRef.current.value.length);
+    }
   }, [query, filter]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
     debouncedPerformSearch(event.target.value, currentFilter);
-  };
-
-  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setCurrentFilter(event.target.value);
-    debouncedPerformSearch(searchQuery, event.target.value);
   };
 
   const performSearch = (search: string, filter: string) => {
@@ -49,21 +61,21 @@ const SearchBar: React.FC<SearchBarProps> = ({ query, filter = 'title' }) => {
   return (
     <div className="flex items-center">
       <input
+        ref={inputRef}
         type="text"
         value={searchQuery}
         onChange={handleInputChange}
         placeholder="Search blog posts..."
         className="px-4 py-2 w-64 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
-      <select
-        value={currentFilter}
-        onChange={handleFilterChange}
-        className="ml-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-      >
-        <option value="title">Title</option>
-        <option value="content">Content</option>
-        <option value="images">Images</option>
-      </select>
+      {searchQuery && (
+        <FilterDropdown
+          currentFilter={currentFilter}
+          setCurrentFilter={setCurrentFilter}
+          debouncedPerformSearch={debouncedPerformSearch}
+          searchQuery={searchQuery}
+        />
+      )}
     </div>
   );
 };

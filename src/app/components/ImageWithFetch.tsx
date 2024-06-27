@@ -7,7 +7,7 @@ interface ImageWithFetchProps {
 }
 
 /**
- * helps render a lightbox image with pre-fetched image data
+ * helps render a lightbox image with pre-fetched image data for ssr or static generation
  */
 const ImageWithFetch = async ({ src, alt }: ImageWithFetchProps) => {
     const data = await fetchImage(src, 'medium');

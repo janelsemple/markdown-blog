@@ -15,11 +15,13 @@ async function createIndex() {
 
   // Check if the index already exists
   const indexExists = await client.indices.exists({ index: indexName });
+
+  // uncomment the next line if you need to clear out the index
+  // await client.indices.delete({ index: indexName });
   
   if (indexExists) {
     console.log(`Index "${indexName}" already exists`);
   } else {
-    // Create the index with the mapping
     await client.indices.create({
       index: indexName,
       body: {

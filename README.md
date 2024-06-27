@@ -25,7 +25,7 @@ second terminal:
 
 ## Elastic Search
 
-Sometimes you may have to clear out the current index and re-index everything. Currently elasticsearch.ts is configured to do that every time as with the amount of current data in the project it is really no time at all to re-index everything again. This can be particularly use
+Sometimes you may have to clear out the current index and re-index everything. There is a commented out line in `elastisearch.ts` that will delete all the indexes so you can start over. 
 
 ## To build static pages and serve
 

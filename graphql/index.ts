@@ -16,7 +16,7 @@ const { url } = await startStandaloneServer(server, {
   listen: { port: 4000 }
 })
 
-// index posts for elastisearch
+// index posts for elastic search
 indexPosts().catch(console.error);
 
 // Start the server

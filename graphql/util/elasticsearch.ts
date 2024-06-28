@@ -3,21 +3,18 @@ import { Client } from '@elastic/elasticsearch';
 /**
  * Elasticsearch client
  */
-const client = new Client({
+export const client = new Client({
   node: 'http://localhost:9200', // This is the address of the Elasticsearch container
 });
 
 /**
  * Function to create the index with mappings
  */
-async function createIndex() {
+export async function createIndex() {
   const indexName = 'posts';
 
   // Check if the index already exists
   const indexExists = await client.indices.exists({ index: indexName });
-
-  // uncomment the next line if you need to clear out the index
-  // await client.indices.delete({ index: indexName });
   
   if (indexExists) {
     console.log(`Index "${indexName}" already exists`);
@@ -46,8 +43,8 @@ async function createIndex() {
   }
 }
 
-// Call the function to create the index
-createIndex().catch(console.error);
-
-export default client;
-
+export async function deleteIndex() {
+  const indexName = 'posts';
+  await client.indices.delete({ index: indexName });
+  console.log(`Index "${indexName}" deleted`);
+}

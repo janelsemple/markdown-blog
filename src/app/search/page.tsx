@@ -26,8 +26,12 @@ const Search = async ({ searchParams }: SearchPageProps) => {
       }
     }
   } catch (err) {
-    error = 'An error occurred while searching for posts';
-    console.error('Error searching for posts', err);
+    if (err instanceof Error) {
+      error = `An error occurred while searching for posts: ${err.message}`;
+    } else {
+      error = 'An unknown error occurred while searching for posts';
+    }
+    console.error('Error searching for posts:', err);
   }
 
   return (

@@ -9,6 +9,8 @@ import {
   SEARCH_IMAGES_BY_ALT 
 } from './queries';
 
+import { ENSURE_INDEX_MUTATION } from './mutations';
+
 export interface PostData {
   id: string;
   title: string;
@@ -141,3 +143,16 @@ export const searchImagesByAlt = async (search: string): Promise<ImageSearchResu
     throw new Error('Failed to search images by alt text.');
   }
 };
+
+
+export const ensureIndex = async (): Promise<string> => {
+  try {
+    const { data } = await getClient().mutate({
+      mutation: ENSURE_INDEX_MUTATION,
+    });
+    return data.ensureIndex;
+  } catch (error) {
+    console.error('Error ensuring index:', error);
+    throw new Error('Failed to ensure index.');
+  }
+}

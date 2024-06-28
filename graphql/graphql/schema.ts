@@ -21,4 +21,8 @@ export const typeDefs = gql`
         post(id: String!): Post
         searchImagesByAltText(altText: String!): [ImageSearchResult]
     }
+
+    type Mutation {
+        ensureIndex: String!
+    }
 `;

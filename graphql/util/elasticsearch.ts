@@ -1,50 +1,79 @@
-import { Client } from '@elastic/elasticsearch';
+import { Client } from "@elastic/elasticsearch";
+
+const INDEX_NAME = "posts";
+
+const client = new Client({ node: "http://localhost:9200" });
 
 /**
- * Elasticsearch client
+ * Ensures the existence of the Elasticsearch index
+ * Creates the index if it doesn't exist, attempts recreation on failure
  */
-export const client = new Client({
-  node: 'http://localhost:9200', // This is the address of the Elasticsearch container
-});
-
-/**
- * Function to create the index with mappings
- */
-export async function createIndex() {
-  const indexName = 'posts';
-
-  // Check if the index already exists
-  const indexExists = await client.indices.exists({ index: indexName });
-  
-  if (indexExists) {
-    console.log(`Index "${indexName}" already exists`);
-  } else {
-    await client.indices.create({
-      index: indexName,
-      body: {
-        mappings: {
-          properties: {
-            title: { type: 'text' },
-            date: { type: 'date' },
-            content: { type: 'text' },
-            images: {
-              type: 'nested',
-              properties: {
-                alt: { type: 'text' },
-                url: { type: 'keyword' },
-                postId: { type: 'keyword' }
-              }
-            }
-          }
-        }
-      }
-    });
-    console.log(`Index "${indexName}" created with mappings`);
+async function ensureIndex() {
+  if (!client) {
+    console.warn("Elasticsearch client is not available in this environment");
+    return;
+  }
+  try {
+    const indexExists = await client.indices.exists({ index: INDEX_NAME });
+    if (!indexExists) {
+      await createIndex();
+    }
+  } catch (error) {
+    console.error(`Index check failed: ${error}`);
+    await recreateIndex();
   }
 }
 
-export async function deleteIndex() {
-  const indexName = 'posts';
-  await client.indices.delete({ index: indexName });
-  console.log(`Index "${indexName}" deleted`);
+/**
+ * Creates the Elasticsearch index with predefined mappings
+ * @throws {Error} If index creation fails
+ */
+async function createIndex() {
+  if (!client) return;
+  try {
+    await client.indices.create({
+      index: INDEX_NAME,
+      body: {
+        mappings: {
+          properties: {
+            title: { type: "text" },
+            date: { type: "date" },
+            content: { type: "text" },
+            images: {
+              type: "nested",
+              properties: {
+                alt: { type: "text" },
+                url: { type: "keyword" },
+                postId: { type: "keyword" },
+              },
+            },
+          },
+        },
+      },
+    });
+    console.log(`Index "${INDEX_NAME}" created successfully`);
+  } catch (error) {
+    throw new Error(`Failed to create index: ${error}`);
+  }
 }
+
+/**
+ * Attempts to recreate the index by deleting and recreating it
+ * @throws {Error} If index recreation fails
+ */
+async function recreateIndex() {
+  if (!client) return;
+  try {
+    await client.indices.delete({
+      index: INDEX_NAME,
+      ignore_unavailable: true,
+    });
+    await createIndex();
+  } catch (error) {
+    console.error(`Index recreation failed: ${error}`);
+    throw new Error("Unable to recover index");
+  }
+}
+
+// Export the client and ensureIndex function
+export { client, ensureIndex };

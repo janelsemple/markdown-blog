@@ -1,7 +1,7 @@
 // pages/api/graphql.ts
 import { NextApiRequest, NextApiResponse } from 'next';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-
+import { ensureIndex } from '../../lib/graphql-service';
 const proxy = createProxyMiddleware({
   target: 'http://localhost:4000', // Your Apollo Server URL
   changeOrigin: true,

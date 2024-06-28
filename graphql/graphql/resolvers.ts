@@ -1,14 +1,10 @@
+// resolvers.js
 import { PostData, getSortedPostsData } from '../util/posts.js';
-import { client } from '../util/elasticsearch.js';
+import { client, ensureIndex } from '../util/elasticsearch.js';
 import { SearchResponse } from '@elastic/elasticsearch/lib/api/types.js';
 
 export const resolvers = {
   Query: {
-    /**
-     * Fetches all sorted posts.
-     *
-     * @returns {Promise<PostData[]>} A promise that resolves to an array of PostData objects.
-     */
     posts: async (): Promise<PostData[]> => {
       try {
         return getSortedPostsData();
@@ -17,24 +13,12 @@ export const resolvers = {
         throw new Error('Failed to fetch sorted posts.');
       }
     },
-
-    /**
-     * Searches for posts that contain the search string in the title.
-     *
-     * @param {any} _ - The parent resolver, not used here.
-     * @param {Object} args - The arguments passed to the resolver.
-     * @param {string} args.search - The search query string.
-     * @returns {Promise<PostData[]>} A promise that resolves to an array of PostData objects that match the search criteria.
-     */
     searchPostsByTitle: async (_: any, { search }: { search: string }) => {
       try {
         if (!search) {
-          // If the search string is empty, return all posts
-          const allPosts = getSortedPostsData();
-          return allPosts;
+          return getSortedPostsData();
         }
 
-        // Search for posts that contain the search string in the title
         const titleResult: SearchResponse<PostData> = await client.search({
           index: 'posts',
           body: {
@@ -50,28 +34,17 @@ export const resolvers = {
           }
         });
 
-        const titleMatches: PostData[] = titleResult.hits.hits.map(hit => ({
+        return titleResult.hits.hits.map(hit => ({
           id: hit._id || '',
           title: hit._source?.title || '',
           date: hit._source?.date || '',
           content: hit._source?.content || '',
         }));
-
-        return titleMatches;
       } catch (error) {
         console.error('Error searching posts by title:', error);
         throw new Error('Failed to search posts by title.');
       }
     },
-
-    /**
-     * Searches for posts that contain the search string in the content.
-     *
-     * @param {any} _ - The parent resolver, not used here.
-     * @param {Object} args - The arguments passed to the resolver.
-     * @param {string} args.search - The search query string.
-     * @returns {Promise<PostData[]>} A promise that resolves to an array of PostData objects that match the search criteria.
-     */
     searchPostsByContent: async (_: any, { search }: { search: string }) => {
       try {
         if (!search) {
@@ -93,46 +66,25 @@ export const resolvers = {
           }
         });
 
-        const contentMatches: PostData[] = contentResult.hits.hits.map(hit => ({
+        return contentResult.hits.hits.map(hit => ({
           id: hit._id || '',
           title: hit._source?.title || '',
           date: hit._source?.date || '',
           content: hit._source?.content || '',
         }));
-
-        return contentMatches;
       } catch (error) {
         console.error('Error searching posts by content:', error);
         throw new Error('Failed to search posts by content.');
       }
     },
-
-    /**
-     * Fetches a single post by its ID.
-     *
-     * @param {any} _ - The parent resolver, not used here.
-     * @param {Object} args - The arguments passed to the resolver.
-     * @param {string} args.id - The ID of the post to fetch.
-     * @returns {Promise<PostData | undefined>} A promise that resolves to a PostData object or undefined if the post is not found.
-     */
     post: async (_: any, { id }: { id: string }): Promise<PostData | undefined> => {
       try {
-        const post = getSortedPostsData().find((post) => post.id === id);
-        return post;
+        return getSortedPostsData().find(post => post.id === id);
       } catch (error) {
         console.error(`Error fetching post with id ${id}:`, error);
         throw new Error(`Failed to fetch post with id ${id}.`);
       }
     },
-
-    /**
-     * Searches for images by alt text.
-     *
-     * @param {any} _ - The parent resolver, not used here.
-     * @param {Object} args - The arguments passed to the resolver.
-     * @param {string} args.altText - The alt text to search for.
-     * @returns {Promise<Array<{ url: string, postId: string, alt: string }>>} A promise that resolves to an array of image URLs, their associated post IDs, and alt text.
-     */
     searchImagesByAltText: async (_: any, { altText }: { altText: string }): Promise<{ url: string; postId: string; alt: string }[]> => {
       try {
         if (!altText) {
@@ -181,6 +133,18 @@ export const resolvers = {
       } catch (error) {
         console.error('Error searching images by alt text:', error);
         throw new Error('Failed to search images by alt text.');
+      }
+    }
+  },
+  Mutation: {
+    ensureIndex: async (): Promise<string> => {
+      try {
+        await ensureIndex();
+        console.log('Elasticsearch index ensured successfully.');
+        return 'Elasticsearch index ensured successfully.';
+      } catch (error) {
+        console.error('Error ensuring Elasticsearch index:', error);
+        throw new Error('Failed to ensure Elasticsearch index.');
       }
     }
   }

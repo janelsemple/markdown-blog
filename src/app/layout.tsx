@@ -1,5 +1,8 @@
-import { ReactNode } from "react";
-import "./globals.css";
+'use client';
+
+import { ReactNode, Suspense } from 'react';
+import Loading from './components/Loading';
+import './globals.css';
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -12,7 +15,11 @@ const RootLayout = ({ children }: RootLayoutProps) => {
         <title>My Blog</title>
         <meta name="description" content="A simple blog built with Next.js" />
       </head>
-      <body>{children}</body>
+      <body>
+        <Suspense fallback={<Loading />}>
+          {children}
+        </Suspense>
+      </body>
     </html>
   );
 };

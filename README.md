@@ -23,6 +23,10 @@ second terminal:
 
 `npm run dev` to start the graphql and Next server. 
 
+## Elastic Search
+
+Sometimes you may have to clear out the current index and re-index everything. There is a commented out line in `elastisearch.ts` that will delete all the indexes so you can start over. 
+
 ## To build static pages and serve
 
 `npm run build` to build the next app (also starts the graphql server which is used for building).

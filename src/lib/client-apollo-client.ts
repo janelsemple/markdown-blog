@@ -1,6 +1,12 @@
 // lib/apolloClient.ts
 import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 
+/**
+ * function to create a new Apollo Client instance.
+ * THIS IS ONLY FOR USE IN CLIENT COMPONENTS
+ * 
+ * @returns {ApolloClient} A new Apollo Client instance.
+ */
 const createApolloClient = () => {
   return new ApolloClient({
     link: new HttpLink({

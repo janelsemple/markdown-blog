@@ -5,6 +5,13 @@ declare global {
         date: string;
       }
 
+      interface ImageSearchResult {
+        url: string;
+        postId: string;
+        alt: string;
+        buffer?: string;
+      }
+
       interface Post {
         id: string;
         title: string;

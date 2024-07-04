@@ -25,7 +25,7 @@ second terminal:
 
 ## Elastic Search
 
-Sometimes you may have to clear out the current index and re-index everything. There is a commented out line in `elastisearch.ts` that will delete all the indexes so you can start over. 
+There is a Graphql endpoint for deleting and re-initializing the elastic search index that is called when the home page is first rendered (essentially once per server startup). This is done for development purposees so that if you update the index between server starts you don't have to restart the elastic search server. It is also done to decouple this action from the starting of the graphql server. 
 
 ## To build static pages and serve
 
